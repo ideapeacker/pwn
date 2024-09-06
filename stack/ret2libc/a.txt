@@ -1,0 +1,248 @@
+GNU gdb (Debian 13.2-1+b1) 13.2
+Copyright (C) 2023 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+[32mGEF[0m for linux ready, type `[4m[33mgef[24m[0m' to start, `[4m[35mgef config[24m[0m' to configure
+[1m[32m88[0m commands loaded and [1m[34m5[0m functions added for GDB [1m[33m13.2[0m in 0.00ms using Python engine [1m[31m3.11[0m
+Reading symbols from level3...
+(No debugging symbols found in level3)
+[?2004h[1;31mgef➤  [0mc
+[?2004l[?2004h[1;31mgef➤  [0mb main
+[?2004lBreakpoint 1 at 0x8048492
+[?2004h[1;31mgef➤  [0mr
+[?2004lStarting program: /home/kali/Desktop/PWN/stack/ret2libc/level3 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, 0x08048492 in main ()
+[H[2J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[1;38;5;240m ────[0m
+[1m[31m$eax   [0m: [31m0x08048484[0m  →  [1;38;5;240m<main+0> lea ecx, [esp+0x4][0m
+[1m[31m$ebx   [0m: 0xf7e23e34  →  0x00223d2c ("[33m,="[0m"?)
+[1m[31m$ecx   [0m: [35m0xffffcf10[0m  →  0x00000001
+[1m[31m$edx   [0m: [35m0xffffcf30[0m  →  0xf7e23e34  →  0x00223d2c ("[33m,="[0m"?)
+[1m[31m$esp   [0m: [35m0xffffcef4[0m  →  [35m0xffffcf10[0m  →  0x00000001
+[1m[31m$ebp   [0m: [35m0xffffcef8[0m  →  0x00000000
+[1m[31m$esi   [0m: [31m0x080484c0[0m  →  [1;38;5;240m<__libc_csu_init+0> push ebp[0m
+[1m[31m$edi   [0m: 0xf7ffcb80  →  0x00000000
+[1m[31m$eip   [0m: [31m0x08048492[0m  →  [1;38;5;240m<main+14> sub esp, 0x4[0m
+[1m[31m$eflags[0m: [zero carry [1mPARITY[0m adjust [1mSIGN[0m trap [1mINTERRUPT[0m direction overflow resume virtualx86 identification]
+[34m$cs[0m: 0x23 [34m$ss[0m: 0x2b [34m$ds[0m: 0x2b [34m$es[0m: 0x2b [34m$fs[0m: 0x00 [1m[31m$gs[0m: 0x63 
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[1;38;5;240m ────[0m
+[36m0xffffcef4[0m│+0x0000: [35m0xffffcf10[0m  →  0x00000001[1m[34m	 ← $esp[0m
+[36m0xffffcef8[0m│+0x0004: 0x00000000[1m[34m	 ← $ebp[0m
+[36m0xffffcefc[0m│+0x0008: [31m0xf7c23c65[0m  →  [1;38;5;240m add esp, 0x10[0m
+[36m0xffffcf00[0m│+0x000c: 0x00000000
+[36m0xffffcf04[0m│+0x0010: 0x00000000
+[36m0xffffcf08[0m│+0x0014: [31m0xf7c3c7c9[0m  →  [1;38;5;240m add ebx, 0x1e766b[0m
+[36m0xffffcf0c[0m│+0x0018: [31m0xf7c23c65[0m  →  [1;38;5;240m add esp, 0x10[0m
+[36m0xffffcf10[0m│+0x001c: 0x00000001
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:x86:32[0m[1;38;5;240m ────[0m
+   [1;38;5;240m 0x804848e <main+10>        push   ebp[0m
+   [1;38;5;240m 0x804848f <main+11>        mov    ebp, esp[0m
+   [1;38;5;240m 0x8048491 <main+13>        push   ecx[0m
+ [32m→  0x8048492 <main+14>        sub    esp, 0x4[0m
+    0x8048495 <main+17>        call   0x804844b <vulnerable_function>
+    0x804849a <main+22>        sub    esp, 0x4
+    0x804849d <main+25>        push   0xe
+    0x804849f <main+27>        push   0x8048548
+    0x80484a4 <main+32>        push   0x1
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "level3", [1m[31mstopped[0m [34m0x8048492[0m in [1m[33mmain[0m (), reason: [1m[35mBREAKPOINT[0m
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] 0x8048492 → [32mmain[0m()
+[1;38;5;240m────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mb vulnerable_function
+[?2004lBreakpoint 2 at 0x8048454
+[?2004h[1;32mgef➤  [0mc
+[?2004lContinuing.
+
+Breakpoint 2, 0x08048454 in vulnerable_function ()
+[H[2J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[1;38;5;240m ────[0m
+[34m$eax   [0m: [31m0x08048484[0m  →  [1;38;5;240m<main+0> lea ecx, [esp+0x4][0m
+[1m[31m$ebx   [0m: 0xf7e23e34  →  0x00223d2c ("[33m,="[0m"?)
+[1m[31m$ecx   [0m: [35m0xffffcf10[0m  →  0x00000001
+[1m[31m$edx   [0m: [35m0xffffcf30[0m  →  0xf7e23e34  →  0x00223d2c ("[33m,="[0m"?)
+[1m[31m$esp   [0m: [35m0xffffce60[0m  →  0x00000000
+[1m[31m$ebp   [0m: [35m0xffffcee8[0m  →  [35m0xffffcef8[0m  →  0x00000000
+[34m$esi   [0m: [31m0x080484c0[0m  →  [1;38;5;240m<__libc_csu_init+0> push ebp[0m
+[1m[31m$edi   [0m: 0xf7ffcb80  →  0x00000000
+[1m[31m$eip   [0m: [31m0x08048454[0m  →  [1;38;5;240m<vulnerable_function+9> sub esp, 0x4[0m
+[34m$eflags[0m: [zero carry [1mPARITY[0m adjust [1mSIGN[0m trap [1mINTERRUPT[0m direction overflow resume virtualx86 identification]
+[34m$cs[0m: 0x23 [34m$ss[0m: 0x2b [34m$ds[0m: 0x2b [34m$es[0m: 0x2b [34m$fs[0m: 0x00 [34m$gs[0m: 0x63 
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[1;38;5;240m ────[0m
+[36m0xffffce60[0m│+0x0000: 0x00000000[1m[34m	 ← $esp[0m
+[36m0xffffce64[0m│+0x0004: 0xf63d4e2e
+[36m0xffffce68[0m│+0x0008: 0xf7ffdc08  →  0xf7ffdb9c  →  0xf7fc2700  →  0xf7ffda30  →  0x00000000
+[36m0xffffce6c[0m│+0x000c: [35m0xffffcee0[0m  →  0xffffffff
+[36m0xffffce70[0m│+0x0010: [35m0xffffcee4[0m  →  0xf7c0c7f0  →  0x000008c7
+[36m0xffffce74[0m│+0x0014: [31m0xf7fd42ce[0m  →  [1;38;5;240m add esp, 0x30[0m
+[36m0xffffce78[0m│+0x0018: [31m0x080481fc[0m  →  [1;38;5;240m pop ds[0m
+[36m0xffffce7c[0m│+0x001c: [35m0xffffcee4[0m  →  0xf7c0c7f0  →  0x000008c7
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:x86:32[0m[1;38;5;240m ────[0m
+   [1;38;5;240m 0x804844b <vulnerable_function+0> push   ebp[0m
+   [1;38;5;240m 0x804844c <vulnerable_function+1> mov    ebp, esp[0m
+   [1;38;5;240m 0x804844e <vulnerable_function+3> sub    esp, 0x88[0m
+ [32m→  0x8048454 <vulnerable_function+9> sub    esp, 0x4[0m
+    0x8048457 <vulnerable_function+12> push   0x7
+    0x8048459 <vulnerable_function+14> push   0x8048540
+    0x804845e <vulnerable_function+19> push   0x1
+    0x8048460 <vulnerable_function+21> call   0x8048340 <write@plt>
+    0x8048465 <vulnerable_function+26> add    esp, 0x10
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "level3", [1m[31mstopped[0m [34m0x8048454[0m in [1m[33mvulnerable_function[0m (), reason: [1m[35mBREAKPOINT[0m
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] 0x8048454 → [32mvulnerable_function[0m()
+[[1m[35m#1[0m] 0x804849a → [32mmain[0m()
+[1;38;5;240m────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mdisass vulnerable_function
+[?2004lDump of assembler code for function vulnerable_function:
+   0x0804844b <+0>:	push   ebp
+   0x0804844c <+1>:	mov    ebp,esp
+   0x0804844e <+3>:	sub    esp,0x88
+=> 0x08048454 <+9>:	sub    esp,0x4
+   0x08048457 <+12>:	push   0x7
+   0x08048459 <+14>:	push   0x8048540
+   0x0804845e <+19>:	push   0x1
+   0x08048460 <+21>:	call   0x8048340 <write@plt>
+   0x08048465 <+26>:	add    esp,0x10
+   0x08048468 <+29>:	sub    esp,0x4
+   0x0804846b <+32>:	push   0x100
+   0x08048470 <+37>:	lea    eax,[ebp-0x88]
+   0x08048476 <+43>:	push   eax
+   0x08048477 <+44>:	push   0x0
+   0x08048479 <+46>:	call   0x8048310 <read@plt>
+   0x0804847e <+51>:	add    esp,0x10
+   0x08048481 <+54>:	nop
+   0x08048482 <+55>:	leave
+   0x08048483 <+56>:	ret
+End of assembler dump.
+[?2004h[1;32mgef➤  [0mb *0x08048483
+[?2004lBreakpoint 3 at 0x8048483
+[?2004h[1;32mgef➤  [0mc
+[?2004lContinuing.
+Input:
+
+Breakpoint 3, 0x08048483 in vulnerable_function ()
+[H[2J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[1;38;5;240m ────[0m
+[1m[31m$eax   [0m: 0x99      
+[1m[31m$ebx   [0m: 0xf7e23e34  →  0x00223d2c ("[33m,="[0m"?)
+[1m[31m$ecx   [0m: [35m0xffffce60[0m  →  [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[1m[31m$edx   [0m: 0x100     
+[1m[31m$esp   [0m: [35m0xffffceec[0m  →  [33m"ddddEEEEFFFF\n"[0m
+[1m[31m$ebp   [0m: 0x63636363 ("[33mcccc[0m"?)
+[34m$esi   [0m: [31m0x080484c0[0m  →  [1;38;5;240m<__libc_csu_init+0> push ebp[0m
+[1m[31m$edi   [0m: 0xf7ffcb80  →  0x00000000
+[1m[31m$eip   [0m: [31m0x08048483[0m  →  [1;38;5;240m<vulnerable_function+56> ret [0m
+[34m$eflags[0m: [zero carry [1mPARITY[0m adjust [1mSIGN[0m trap [1mINTERRUPT[0m direction overflow resume virtualx86 identification]
+[34m$cs[0m: 0x23 [34m$ss[0m: 0x2b [34m$ds[0m: 0x2b [34m$es[0m: 0x2b [34m$fs[0m: 0x00 [34m$gs[0m: 0x63 
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[1;38;5;240m ────[0m
+[36m0xffffceec[0m│+0x0000: [33m"ddddEEEEFFFF\n"[0m[1m[34m	 ← $esp[0m
+[36m0xffffcef0[0m│+0x0004: [33m"EEEEFFFF\n"[0m
+[36m0xffffcef4[0m│+0x0008: [33m"FFFF\n"[0m
+[36m0xffffcef8[0m│+0x000c: 0x0000000a ("[33m\n[0m"?)
+[36m0xffffcefc[0m│+0x0010: [31m0xf7c23c65[0m  →  [1;38;5;240m add esp, 0x10[0m
+[36m0xffffcf00[0m│+0x0014: 0x00000000
+[36m0xffffcf04[0m│+0x0018: 0x00000000
+[36m0xffffcf08[0m│+0x001c: [31m0xf7c3c7c9[0m  →  [1;38;5;240m add ebx, 0x1e766b[0m
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:x86:32[0m[1;38;5;240m ────[0m
+   [1;38;5;240m 0x804847e <vulnerable_function+51> add    esp, 0x10[0m
+   [1;38;5;240m 0x8048481 <vulnerable_function+54> nop    [0m
+   [1;38;5;240m 0x8048482 <vulnerable_function+55> leave  [0m
+ [32m→  0x8048483 <vulnerable_function+56> ret    [0m
+[1m[31m[!][0m Cannot disassemble from $PC
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "level3", [1m[31mstopped[0m [34m0x8048483[0m in [1m[33mvulnerable_function[0m (), reason: [1m[35mBREAKPOINT[0m
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] 0x8048483 → [32mvulnerable_function[0m()
+[1;38;5;240m────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mset *(unsigned int*)0xffffceec=0x8048340
+[?2004l[?2004h[1;32mgef➤  [0mset *(unsigned int*)0xffffcef0=0x804844B
+[?2004l[?2004h[1;32mgef➤  [0mset *(unsigned int*)0xffffcef4=1
+[?2004l[?2004h[1;32mgef➤  [0mset *(unsigned int*)0xffffcef8=0x804a018
+[?2004l[?2004h[1;32mgef➤  [0mset *(unsigned int*)0xffffcefc=4
+[?2004l[?2004h[1;32mgef➤  [0mc
+[?2004lContinuing.
+����
+Breakpoint 2, 0x08048454 in vulnerable_function ()
+[H[2J[ Legend: [1m[31mModified register[0m | [31mCode[0m | [32mHeap[0m | [35mStack[0m | [33mString[0m ]
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────── [0m[36mregisters[0m[1;38;5;240m ────[0m
+[1m[31m$eax   [0m: 0x4       
+[1m[31m$ebx   [0m: 0xf7e23e34  →  0x00223d2c ("[33m,="[0m"?)
+[1m[31m$ecx   [0m: [31m0x0804a018[0m  →  [31m0xf7d186f0[0m  →  [1;38;5;240m<write+0> push edi[0m
+[1m[31m$edx   [0m: 0x4       
+[1m[31m$esp   [0m: [35m0xffffce68[0m  →  [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[1m[31m$ebp   [0m: [35m0xffffcef0[0m  →  0x63636363 ("[33mcccc[0m"?)
+[34m$esi   [0m: [31m0x080484c0[0m  →  [1;38;5;240m<__libc_csu_init+0> push ebp[0m
+[1m[31m$edi   [0m: 0xf7ffcb80  →  0x00000000
+[1m[31m$eip   [0m: [31m0x08048454[0m  →  [1;38;5;240m<vulnerable_function+9> sub esp, 0x4[0m
+[1m[31m$eflags[0m: [zero carry parity [1mADJUST[0m [1mSIGN[0m trap [1mINTERRUPT[0m direction overflow resume virtualx86 identification]
+[34m$cs[0m: 0x23 [34m$ss[0m: 0x2b [34m$ds[0m: 0x2b [34m$es[0m: 0x2b [34m$fs[0m: 0x00 [34m$gs[0m: 0x63 
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────── [0m[36mstack[0m[1;38;5;240m ────[0m
+[36m0xffffce68[0m│+0x0000: [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m[1m[34m	 ← $esp[0m
+[36m0xffffce6c[0m│+0x0004: [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[36m0xffffce70[0m│+0x0008: [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[36m0xffffce74[0m│+0x000c: [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[36m0xffffce78[0m│+0x0010: [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[36m0xffffce7c[0m│+0x0014: [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[36m0xffffce80[0m│+0x0018: [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[36m0xffffce84[0m│+0x001c: [33m"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"[0m
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────── [0m[36mcode:x86:32[0m[1;38;5;240m ────[0m
+   [1;38;5;240m 0x804844b <vulnerable_function+0> push   ebp[0m
+   [1;38;5;240m 0x804844c <vulnerable_function+1> mov    ebp, esp[0m
+   [1;38;5;240m 0x804844e <vulnerable_function+3> sub    esp, 0x88[0m
+ [32m→  0x8048454 <vulnerable_function+9> sub    esp, 0x4[0m
+    0x8048457 <vulnerable_function+12> push   0x7
+    0x8048459 <vulnerable_function+14> push   0x8048540
+    0x804845e <vulnerable_function+19> push   0x1
+    0x8048460 <vulnerable_function+21> call   0x8048340 <write@plt>
+    0x8048465 <vulnerable_function+26> add    esp, 0x10
+[1;38;5;240m─────────────────────────────────────────────────────────────────────────────────────── [0m[36mthreads[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] Id 1, Name: "level3", [1m[31mstopped[0m [34m0x8048454[0m in [1m[33mvulnerable_function[0m (), reason: [1m[35mBREAKPOINT[0m
+[1;38;5;240m───────────────────────────────────────────────────────────────────────────────────────── [0m[36mtrace[0m[1;38;5;240m ────[0m
+[[1m[32m#0[0m] 0x8048454 → [32mvulnerable_function[0m()
+[1;38;5;240m────────────────────────────────────────────────────────────────────────────────────────────────────[0m
+[?2004h[?2004l[?2004h[1;32mgef➤  [0mb w[K[K[Kinfo func write
+[?2004lAll functions matching regular expression "write":
+
+Non-debugging symbols:
+0x08048340  write@plt
+0xf7c73e30  _IO_fwrite
+0xf7c73e30  fwrite
+0xf7c79270  _IO_wdo_write
+0xf7c7e700  fwrite_unlocked
+0xf7c7f9a0  _IO_do_write
+0xf7c80ad0  _IO_file_write
+0xf7c947e0  aio_write
+0xf7c94800  aio_write64
+0xf7cf4eb0  __libc_pwrite
+0xf7cf4eb0  pwrite
+0xf7cf4f80  __pwrite64
+0xf7cf4f80  pwrite64
+0xf7d186f0  __write
+0xf7d186f0  write
+0xf7d19330  __write_nocancel
+0xf7d20820  pwritev
+0xf7d20900  pwritev2
+0xf7d20b00  pwritev64
+0xf7d20bd0  pwritev64v2
+0xf7d23df0  writev
+0xf7d251a0  eventfd_write
+0xf7d25b50  process_vm_writev
+0xf7d74a00  _IO_do_write
+0xf7d75480  _IO_file_write
+[?2004h[1;32mgef➤  [0m[?2004l[?2004h[1;32mgef➤  [0mq
+[?2004l

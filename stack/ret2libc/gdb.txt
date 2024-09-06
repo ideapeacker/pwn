@@ -1,0 +1,374 @@
+Num     Type           Disp Enb Address    What
+1       breakpoint     keep y   0x08048492 <main+14>
+	breakpoint already hit 1 time
+3       breakpoint     keep y   0x0804847e <vulnerable_function+51>
+	breakpoint already hit 2 times
+4       breakpoint     keep y   0xf7d186f0 <write>
+	breakpoint already hit 2 times
+The program is not being run.
+Starting program: /home/kali/Desktop/PWN/stack/ret2libc/level3 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, 0x08048492 in main ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x08048484  →  <main+0> lea ecx, [esp+0x4]
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffcf10  →  0x00000001
+$edx   : 0xffffcf30  →  0xf7e23e34  →  0x00223d2c (",=""?)
+$esp   : 0xffffcef4  →  0xffffcf10  →  0x00000001
+$ebp   : 0xffffcef8  →  0x00000000
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0x08048492  →  <main+14> sub esp, 0x4
+$eflags: [zero carry PARITY adjust SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffcef4│+0x0000: 0xffffcf10  →  0x00000001	 ← $esp
+0xffffcef8│+0x0004: 0x00000000	 ← $ebp
+0xffffcefc│+0x0008: 0xf7c23c65  →   add esp, 0x10
+0xffffcf00│+0x000c: 0x00000000
+0xffffcf04│+0x0010: 0x00000000
+0xffffcf08│+0x0014: 0xf7c3c7c9  →   add ebx, 0x1e766b
+0xffffcf0c│+0x0018: 0xf7c23c65  →   add esp, 0x10
+0xffffcf10│+0x001c: 0x00000001
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x804848e <main+10>        push   ebp
+    0x804848f <main+11>        mov    ebp, esp
+    0x8048491 <main+13>        push   ecx
+ →  0x8048492 <main+14>        sub    esp, 0x4
+    0x8048495 <main+17>        call   0x804844b <vulnerable_function>
+    0x804849a <main+22>        sub    esp, 0x4
+    0x804849d <main+25>        push   0xe
+    0x804849f <main+27>        push   0x8048548
+    0x80484a4 <main+32>        push   0x1
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0x8048492 in main (), reason: BREAKPOINT
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x8048492 → main()
+───────────────────────────────────────────────────────────────────────────────────────────────────
+Num     Type           Disp Enb Address    What
+1       breakpoint     keep y   0x08048492 <main+14>
+	breakpoint already hit 1 time
+3       breakpoint     keep y   0x0804847e <vulnerable_function+51>
+Continuing.
+
+Breakpoint 3, 0x0804847e in vulnerable_function ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x99      
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$edx   : 0x100     
+$esp   : 0xffffce50  →  0x00000000
+$ebp   : 0xffffcee8  →  "ccccddddEEEEFFFF\n"
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0x0804847e  →  <vulnerable_function+51> add esp, 0x10
+$eflags: [zero carry parity adjust SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffce50│+0x0000: 0x00000000	 ← $esp
+0xffffce54│+0x0004: 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce58│+0x0008: 0x00000100
+0xffffce5c│+0x000c: 0xf7fca000  →  0x464c457f
+0xffffce60│+0x0010: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce64│+0x0014: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce68│+0x0018: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce6c│+0x001c: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x8048476 <vulnerable_function+43> push   eax
+    0x8048477 <vulnerable_function+44> push   0x0
+    0x8048479 <vulnerable_function+46> call   0x8048310 <read@plt>
+ →  0x804847e <vulnerable_function+51> add    esp, 0x10
+    0x8048481 <vulnerable_function+54> nop    
+    0x8048482 <vulnerable_function+55> leave  
+    0x8048483 <vulnerable_function+56> ret    
+    0x8048484 <main+0>         lea    ecx, [esp+0x4]
+    0x8048488 <main+4>         and    esp, 0xfffffff0
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0x804847e in vulnerable_function (), reason: BREAKPOINT
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x804847e → vulnerable_function()
+───────────────────────────────────────────────────────────────────────────────────────────────────
+0x08048481 in vulnerable_function ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x99      
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$edx   : 0x100     
+$esp   : 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$ebp   : 0xffffcee8  →  "ccccddddEEEEFFFF\n"
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0x08048481  →  <vulnerable_function+54> nop 
+$eflags: [zero carry PARITY adjust SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffce60│+0x0000: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"	 ← $esp
+0xffffce64│+0x0004: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce68│+0x0008: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce6c│+0x000c: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce70│+0x0010: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce74│+0x0014: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce78│+0x0018: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce7c│+0x001c: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x8048477 <vulnerable_function+44> push   0x0
+    0x8048479 <vulnerable_function+46> call   0x8048310 <read@plt>
+    0x804847e <vulnerable_function+51> add    esp, 0x10
+ →  0x8048481 <vulnerable_function+54> nop    
+    0x8048482 <vulnerable_function+55> leave  
+    0x8048483 <vulnerable_function+56> ret    
+    0x8048484 <main+0>         lea    ecx, [esp+0x4]
+    0x8048488 <main+4>         and    esp, 0xfffffff0
+    0x804848b <main+7>         push   DWORD PTR [ecx-0x4]
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0x8048481 in vulnerable_function (), reason: SINGLE STEP
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x8048481 → vulnerable_function()
+───────────────────────────────────────────────────────────────────────────────────────────────────
+0x08048482 in vulnerable_function ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x99      
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$edx   : 0x100     
+$esp   : 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$ebp   : 0xffffcee8  →  "ccccddddEEEEFFFF\n"
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0x08048482  →  <vulnerable_function+55> leave 
+$eflags: [zero carry PARITY adjust SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffce60│+0x0000: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"	 ← $esp
+0xffffce64│+0x0004: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce68│+0x0008: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce6c│+0x000c: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce70│+0x0010: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce74│+0x0014: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce78│+0x0018: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce7c│+0x001c: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x8048479 <vulnerable_function+46> call   0x8048310 <read@plt>
+    0x804847e <vulnerable_function+51> add    esp, 0x10
+    0x8048481 <vulnerable_function+54> nop    
+ →  0x8048482 <vulnerable_function+55> leave  
+    0x8048483 <vulnerable_function+56> ret    
+    0x8048484 <main+0>         lea    ecx, [esp+0x4]
+    0x8048488 <main+4>         and    esp, 0xfffffff0
+    0x804848b <main+7>         push   DWORD PTR [ecx-0x4]
+    0x804848e <main+10>        push   ebp
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0x8048482 in vulnerable_function (), reason: SINGLE STEP
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x8048482 → vulnerable_function()
+───────────────────────────────────────────────────────────────────────────────────────────────────
+0x08048483 in vulnerable_function ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x99      
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$edx   : 0x100     
+$esp   : 0xffffceec  →  "ddddEEEEFFFF\n"
+$ebp   : 0x63636363 ("cccc"?)
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0x08048483  →  <vulnerable_function+56> ret 
+$eflags: [zero carry PARITY adjust SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffceec│+0x0000: "ddddEEEEFFFF\n"	 ← $esp
+0xffffcef0│+0x0004: "EEEEFFFF\n"
+0xffffcef4│+0x0008: "FFFF\n"
+0xffffcef8│+0x000c: 0x0000000a ("\n"?)
+0xffffcefc│+0x0010: 0xf7c23c65  →   add esp, 0x10
+0xffffcf00│+0x0014: 0x00000000
+0xffffcf04│+0x0018: 0x00000000
+0xffffcf08│+0x001c: 0xf7c3c7c9  →   add ebx, 0x1e766b
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x804847e <vulnerable_function+51> add    esp, 0x10
+    0x8048481 <vulnerable_function+54> nop    
+    0x8048482 <vulnerable_function+55> leave  
+ →  0x8048483 <vulnerable_function+56> ret    
+[!] Cannot disassemble from $PC
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0x8048483 in vulnerable_function (), reason: SINGLE STEP
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x8048483 → vulnerable_function()
+───────────────────────────────────────────────────────────────────────────────────────────────────
+quit
+Num     Type           Disp Enb Address    What
+1       breakpoint     keep y   0x08048492 <main+14>
+	breakpoint already hit 1 time
+3       breakpoint     keep y   0x0804847e <vulnerable_function+51>
+	breakpoint already hit 1 time
+0xffffce60:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffce70:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffce80:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffce90:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffcea0:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffceb0:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffcec0:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffced0:	0x61616161	0x61616161	0x61616161	0x61616161
+0xffffcee0:	0x61616161	0x62626262	0x63636363	0x64646464
+0xffffcef0:	0x45454545	0x46464646	0x0000000a	0xf7c23c65
+0xffffcf00:	0x00000000	0x00000000	0xf7c3c7c9	0xf7c23c65
+0xffffcf10:	0x00000001	0xffffcfc4	0xffffcfcc	0xffffcf30
+Left operand of assignment is not an lvalue.
+0x08048340 in write@plt ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x99      
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$edx   : 0x100     
+$esp   : 0xffffcef0  →  0x0804844b  →  <vulnerable_function+0> push ebp
+$ebp   : 0x63636363 ("cccc"?)
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0x08048340  →  <write@plt+0> jmp DWORD PTR ds:0x804a018
+$eflags: [zero carry PARITY adjust SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffcef0│+0x0000: 0x0804844b  →  <vulnerable_function+0> push ebp	 ← $esp
+0xffffcef4│+0x0004: 0x00000001
+0xffffcef8│+0x0008: 0x0804a018  →  0xf7d186f0  →  <write+0> push edi
+0xffffcefc│+0x000c: 0x00000004
+0xffffcf00│+0x0010: 0x00000000
+0xffffcf04│+0x0014: 0x00000000
+0xffffcf08│+0x0018: 0xf7c3c7c9  →   add ebx, 0x1e766b
+0xffffcf0c│+0x001c: 0xf7c23c65  →   add esp, 0x10
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x8048330 <__libc_start_main@plt+0> jmp    DWORD PTR ds:0x804a014
+    0x8048336 <__libc_start_main@plt+6> push   0x10
+    0x804833b <__libc_start_main@plt+11> jmp    0x8048300
+ →  0x8048340 <write@plt+0>    jmp    DWORD PTR ds:0x804a018
+    0x8048346 <write@plt+6>    push   0x18
+    0x804834b <write@plt+11>   jmp    0x8048300
+    0x8048350 <_start+0>       xor    ebp, ebp
+    0x8048352 <_start+2>       pop    esi
+    0x8048353 <_start+3>       mov    ecx, esp
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0x8048340 in write@plt (), reason: SINGLE STEP
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x8048340 → write@plt()
+[#1] 0x804844b → frame_dummy()
+───────────────────────────────────────────────────────────────────────────────────────────────────
+0xf7d186f0 in write () from /lib32/libc.so.6
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x99      
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffce60  →  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$edx   : 0x100     
+$esp   : 0xffffcef0  →  0x0804844b  →  <vulnerable_function+0> push ebp
+$ebp   : 0x63636363 ("cccc"?)
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0xf7d186f0  →  <write+0> push edi
+$eflags: [zero carry PARITY adjust SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffcef0│+0x0000: 0x0804844b  →  <vulnerable_function+0> push ebp	 ← $esp
+0xffffcef4│+0x0004: 0x00000001
+0xffffcef8│+0x0008: 0x0804a018  →  0xf7d186f0  →  <write+0> push edi
+0xffffcefc│+0x000c: 0x00000004
+0xffffcf00│+0x0010: 0x00000000
+0xffffcf04│+0x0014: 0x00000000
+0xffffcf08│+0x0018: 0xf7c3c7c9  →   add ebx, 0x1e766b
+0xffffcf0c│+0x001c: 0xf7c23c65  →   add esp, 0x10
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+   0xf7d186ea                  xchg   ax, ax
+   0xf7d186ec                  xchg   ax, ax
+   0xf7d186ee                  xchg   ax, ax
+ → 0xf7d186f0 <write+0>        push   edi
+   0xf7d186f1 <write+1>        push   esi
+   0xf7d186f2 <write+2>        call   0xf7d73045
+   0xf7d186f7 <write+7>        add    esi, 0x10b73d
+   0xf7d186fd <write+13>       push   ebx
+   0xf7d186fe <write+14>       sub    esp, 0x10
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0xf7d186f0 in write (), reason: SINGLE STEP
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0xf7d186f0 → write()
+[#1] 0x804844b → frame_dummy()
+───────────────────────────────────────────────────────────────────────────────────────────────────
+Run till exit from #0  0xf7d186f0 in write () from /lib32/libc.so.6
+
+Breakpoint 3, 0x0804847e in vulnerable_function ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x2       
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffce68  →  "c\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$edx   : 0x100     
+$esp   : 0xffffce58  →  0x00000000
+$ebp   : 0xffffcef0  →  0x63636363 ("cccc"?)
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0x0804847e  →  <vulnerable_function+51> add esp, 0x10
+$eflags: [zero carry PARITY adjust SIGN trap INTERRUPT direction overflow resume virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffce58│+0x0000: 0x00000000	 ← $esp
+0xffffce5c│+0x0004: 0xffffce68  →  "c\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce60│+0x0008: 0x00000100
+0xffffce64│+0x000c: "aaaac\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce68│+0x0010: "c\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce6c│+0x0014: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce70│+0x0018: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+0xffffce74│+0x001c: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+    0x8048476 <vulnerable_function+43> push   eax
+    0x8048477 <vulnerable_function+44> push   0x0
+    0x8048479 <vulnerable_function+46> call   0x8048310 <read@plt>
+ →  0x804847e <vulnerable_function+51> add    esp, 0x10
+    0x8048481 <vulnerable_function+54> nop    
+    0x8048482 <vulnerable_function+55> leave  
+    0x8048483 <vulnerable_function+56> ret    
+    0x8048484 <main+0>         lea    ecx, [esp+0x4]
+    0x8048488 <main+4>         and    esp, 0xfffffff0
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0x804847e in vulnerable_function (), reason: BREAKPOINT
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+[#0] 0x804847e → vulnerable_function()
+───────────────────────────────────────────────────────────────────────────────────────────────────
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x00000001 in ?? ()
+[ Legend: Modified register | Code | Heap | Stack | String ]
+──────────────────────────────────────────────────────────────────────────────────── registers ────
+$eax   : 0x2       
+$ebx   : 0xf7e23e34  →  0x00223d2c (",=""?)
+$ecx   : 0xffffce68  →  "c\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa[...]"
+$edx   : 0x100     
+$esp   : 0xffffcef8  →  0x0804a018  →  0xf7d186f0  →  <write+0> push edi
+$ebp   : 0x63636363 ("cccc"?)
+$esi   : 0x080484c0  →  <__libc_csu_init+0> push ebp
+$edi   : 0xf7ffcb80  →  0x00000000
+$eip   : 0x1       
+$eflags: [zero carry parity adjust SIGN trap INTERRUPT direction overflow RESUME virtualx86 identification]
+$cs: 0x23 $ss: 0x2b $ds: 0x2b $es: 0x2b $fs: 0x00 $gs: 0x63 
+──────────────────────────────────────────────────────────────────────────────────────── stack ────
+0xffffcef8│+0x0000: 0x0804a018  →  0xf7d186f0  →  <write+0> push edi	 ← $esp
+0xffffcefc│+0x0004: 0x00000004
+0xffffcf00│+0x0008: 0x00000000
+0xffffcf04│+0x000c: 0x00000000
+0xffffcf08│+0x0010: 0xf7c3c7c9  →   add ebx, 0x1e766b
+0xffffcf0c│+0x0014: 0xf7c23c65  →   add esp, 0x10
+0xffffcf10│+0x0018: 0x00000001
+0xffffcf14│+0x001c: 0xffffcfc4  →  0xffffd1a6  →  "/home/kali/Desktop/PWN/stack/ret2libc/level3"
+────────────────────────────────────────────────────────────────────────────────── code:x86:32 ────
+[!] Cannot disassemble from $PC
+[!] Cannot access memory at address 0x1
+────────────────────────────────────────────────────────────────────────────────────── threads ────
+[#0] Id 1, Name: "level3", stopped 0x1 in ?? (), reason: SIGSEGV
+──────────────────────────────────────────────────────────────────────────────────────── trace ────
+───────────────────────────────────────────────────────────────────────────────────────────────────
